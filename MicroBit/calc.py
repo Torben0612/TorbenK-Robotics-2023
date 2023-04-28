@@ -1,4 +1,5 @@
 from microbit import *
+import time
 
 second_number = False
 
@@ -32,14 +33,20 @@ while True:
     if accelerometer.was_gesture('shake'):
         second_number = True
     if button_a.is_pressed() and button_b.is_pressed():
+        while button_a.is_pressed() or button_b.is_pressed():
+            pass
         operators_index += 1
         display.show(Image(operators[operators_index % len(operators)]))
     elif button_a.was_pressed():
-        numbers_index -= 1
-        display.show(numbers[numbers_index % len(numbers)])
+        time.sleep(.2)
+        if not button_b.was_pressed():
+            numbers_index -= 1
+            display.show(numbers[numbers_index % len(numbers)])
     elif button_b.was_pressed():
-        numbers_index += 1
-        display.show(numbers[numbers_index % len(numbers)])
+        time.sleep(.2)
+        if not button_a.was_pressed():
+            numbers_index += 1
+            display.show(numbers[numbers_index % len(numbers)])
 
 def operate(first, second, operator):
     if operators_index % len(operators) == 0:
