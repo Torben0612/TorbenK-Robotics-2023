@@ -6,11 +6,11 @@ m = 2.5 - b / 1023 - 0
 k = pin2.read_analog()
 t = m * k + b
 
+def alalog_to_servo(val):
+    return int(((val / 1023) * 200) +50)
+
+
 while True: 
     pin16.set_analog_period(10)
-    pin16.write_analog(75)
-    sleep(1000)
-    pin16.write_analog(50)
-    sleep(1000)
-    pin16.write_analog(100)
-    sleep(1000)
+    var = alalog_to_servo(pin2.read_analog())
+    pin16.write_analog(var)
