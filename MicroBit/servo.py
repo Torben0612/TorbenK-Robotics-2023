@@ -1,14 +1,16 @@
 from microbit import * 
-# Servo control: 
-# 50 = ~1 millisecond pulse all right 
-# 75 = ~1.5 millisecond pulse center 
-# 100 = ~2.0 millisecond pulse all left 
-pin0.set_analog_period(20)
+# Servo setup: 
+T = 10
+b = 0.5
+m = 2.5 - b / 1023 - 0
+k = pin2.read_analog()
+t = m * k + b
 
 while True: 
-	pin0.write_analog(75)
-	sleep(1000)
-	pin0.write_analog(50)
-	sleep(1000)
-	pin0.write_analog(100)
-	sleep(1000)
+    pin16.set_analog_period(10)
+    pin16.write_analog(75)
+    sleep(1000)
+    pin16.write_analog(50)
+    sleep(1000)
+    pin16.write_analog(100)
+    sleep(1000)
